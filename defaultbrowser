@@ -1,0 +1,17 @@
+# Bash completion for defaultbrowser:
+# defaultbrowser <tab>
+#
+# Github: https://github.com/jonasbn/bash_completion_defaultbrowser
+# Copyright Jonas B. Nielsen (jonasbn) 2018
+# MIT License
+
+_defaultbrowser()
+{
+    COMPREPLY=()
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    # local opts=$(defaultbrowser | sed 's/\([[:alnum:]]\):.*/\1/')
+    local opts=$(defaultbrowser | sed -e 's/*//' | sed -e 's/^[ \t]*//')
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+
+complete -F _defaultbrowser defaultbrowser
